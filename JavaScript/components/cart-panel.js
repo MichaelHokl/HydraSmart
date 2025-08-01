@@ -1,6 +1,6 @@
 'use strict'
 import { bestsellers } from "/JavaScript/data/best-sellers.js";
-import { popUp } from "../components/popup.js";
+import { popUp } from "./popup.js";
 
 export function loadCart() {
   fetch("./Partials/cart-side-panel.html")
@@ -118,6 +118,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   checkoutBtn.textContent = 'Checkout';
 
   cartAmount.textContent = totalItems.toString();
+  setAriaLabel(totalItems);
   
   const subtotalContainer = document.createElement('div');
   const subtotal = document.createElement('p');
@@ -191,6 +192,13 @@ function addToCart(cart, productId) {
     cart.push({ ...product, quantity: 1 });
   }
   return true;
+}
+
+function setAriaLabel(amount) {
+  const element = document.getElementById('cart-amount');
+
+  element.setAttribute(aria-label, `There are ${amount} items in your cart.`)
+
 }
 
 
