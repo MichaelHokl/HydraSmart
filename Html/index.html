@@ -12,6 +12,7 @@
     <meta property="og:image" content="https://example.com/.me.jpg"/>
     <link rel="stylesheet" href="/CSS/styles.css"/>
     <link rel="stylesheet" href="/CSS/navigation.css"/>
+    <link rel="stylesheet" href="/CSS/popup.css"/>
     <link rel="stylesheet" href="/CSS/index.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="icon" href="/images/logo.png" type="image/png">
@@ -26,6 +27,7 @@
 <!-- Navigation --> 
 
     <div id="navigation-placeholder"></div>
+    <div id="pop-up-placeholder"></div>
 
 <!-- Main Content -->
 
@@ -262,7 +264,11 @@
                             required 
                             autocomplete="email">
                     </div>
-                    <button id='submit-btn' class='submit-btn' type="submit">Subscribe</button>
+                    <button id='submit-btn' 
+                            class='submit-btn' 
+                            type="submit" 
+                            data-popup-message="Thank You For Submitting" 
+                            data-popup-type="success">Subscribe</button>
                 </form>
             </div>  
         </section>

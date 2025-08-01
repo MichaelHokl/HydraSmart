@@ -1,7 +1,7 @@
 'use strict'
 
 export function loadNav (){
-    fetch("./Partials/navigation.html")
+    return fetch("./Partials/navigation.html")
     .then(response => response.text())
     .then(data => {
         document.getElementById("navigation-placeholder").innerHTML = data;

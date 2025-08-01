@@ -1,6 +1,6 @@
 'use strict'
 
-import { addSignup } from "../data/userData.js";
+import { popUp } from "../components/popup.js";
 
 export function setupNewsLetterForm(formId, InputId){
     const form = document.getElementById(formId);
@@ -10,23 +10,28 @@ export function setupNewsLetterForm(formId, InputId){
         form.addEventListener('submit', e => {
             e.preventDefault();
             const emailValue = emailInput.value.trim();
-            if(!isValidEmail(emailValue)){
-                alert('Please Enter a Valid Email!')
-                return;
-            }
-
-            const signup = {
-                id: crypto.randomUUID(),
-                email: emailValue
-            };
-            addSignup(signup);
-            alert('Thank You for Subscribing!')
-            form.reset()
+            isValidEmail(emailValue);
+            const isValid = isValidEmail(emailValue);
+            addSignup(isValid, emailValue, form);
         }); 
     };
 };
 
 function isValidEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+    let validEmail = re.test(email);
+    return validEmail;
+}
+
+function addSignup (validEmail, emailValue, form){
+    let signups = [];
+     if(!validEmail){
+            popUp('error', 'Please Submit A Valid Email Address.')
+            return false;
+        } else{
+            const signup = {id: crypto.randomUUID(), email: emailValue};
+            signups.push(signup);
+            popUp('success', 'Email Submitted Successfully.');
+    }
+    form.reset();
 }

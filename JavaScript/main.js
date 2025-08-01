@@ -7,13 +7,16 @@ import { testimonialRender } from "./data/testimonials.js";
 import initFaqToggle from "./components/faq-toggle.js";
 import { setupNewsLetterForm } from "./utils/newsletterHandler.js";
 import {loadFooter} from "./layout/load-footer.js";
+import { loadPopUp } from "./components/popup.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadNav();
-    loadCart();
+    loadNav().then(() => {
+        loadCart()
+    });
     bestsellerRender();
     testimonialRender()
     initFaqToggle();
     setupNewsLetterForm('signup-main', 'email-main');
     loadFooter();
+    loadPopUp()
 })

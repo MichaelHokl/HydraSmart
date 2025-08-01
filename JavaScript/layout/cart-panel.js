@@ -1,5 +1,6 @@
 'use strict'
 import { bestsellers } from "/JavaScript/data/best-sellers.js";
+import { popUp } from "../components/popup.js";
 
 export function loadCart() {
   fetch("./Partials/cart-side-panel.html")
@@ -23,19 +24,14 @@ export function loadCart() {
       buyButtons.forEach(button => {
         button.addEventListener('click', () => {
           const productId = button.dataset.id;
-          const product = bestsellers.find(p => p.id === productId);
-          if (!product) return;
+          const result = addToCart(cart, productId);
 
-          const existingItem = cart.find(item => item.id === productId);
-          if (existingItem) {
-            existingItem.quantity += 1;
-          } else {
-            cart.push({
-              ...product,
-              quantity: 1
-            });
+          if(result) {
+            updateCartPanel(cart, panelProductsContainer, cartAmount);
+            popUp('success', 'Item Added To Cart Succesfully')
+          }else{
+            popUp('error', 'Something Went Wrong. Please Try Again.')
           }
-          updateCartPanel(cart, panelProductsContainer, cartAmount);
         });
       });
     });
@@ -183,4 +179,18 @@ function initCartPanel(openPanel, closePanel, overlay, sidePanel) {
     overlay.classList.remove('on');
   });
 }
+
+function addToCart(cart, productId) {
+  const product = bestsellers.find(p => p.id === productId);
+  if (!product) return false;
+
+  const existingItem = cart.find(item => item.id === productId);
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ ...product, quantity: 1 });
+  }
+  return true;
+}
+
 
