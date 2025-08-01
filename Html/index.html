@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Michael Hokl" />
+    <meta name="description" content="Smart Waterbottle Online Shop"/>
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="HydraSmart Waterbottles"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://example.com/"/>
+    <meta property="og:image" content="https://example.com/.me.jpg"/>
+    <link rel="stylesheet" href="/CSS/styles.css"/>
+    <link rel="stylesheet" href="/CSS/navigation.css"/>
+    <link rel="stylesheet" href="/CSS/index.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="icon" href="/images/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <title>HydraSmart Online Shop</title>
+</head>
+<body>
+
+<!-- Navigation --> 
+
+    <div id="navigation-placeholder"></div>
+
+<!-- Main Content -->
+
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" aria-labelledby="hero-heading" role="region">
+            <header>
+                <h1 id="hero-heading">Stay Hydrated<br>Stay Smart</h1>
+                <p>
+                Track your water intake<br> 
+                with our eco-friendly smart bottle
+                </p>
+            </header>
+            <div class="hero-cta">
+                <a href="products.html" class="link-button" aria-label="Shop Now for eco-friendly smart water bottles">Shop Now</a>
+                <ul class="hero-trust-badges" aria-label="Our customer promises">
+                <li><span aria-hidden="true">✓</span> Free Shipping</li>
+                <li><span aria-hidden="true">✓</span> Satisfaction Guarantee</li>
+                <li><span aria-hidden="true">✓</span> Money Back Guarantee</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Value Proporsition -->
+        <section id="value-proposition" aria-labelledby="value-heading" role="region">
+            <header>
+                <h2 id="value-heading">Designed for Daily Life</h2>
+            </header>
+            <div class="value-card-container">
+                <article class="value-card card" aria-labelledby="card1-title" aria-describedby="card1-desc">
+                    <header>
+                        <img src="/Images/App-sync.png" alt="HydraSmart app syncing with smartphone" />
+                        <h3 id="card1-title">App Sync</h3>
+                    </header>
+                    <p id="card1-desc">Track your daily water intake and stay hydrated</p>
+                </article>
+
+                <article class="value-card card" aria-labelledby="card2-title" aria-describedby="card2-desc">
+                    <header>
+                        <img src="/Images/Eco-friendly.png" alt="Eco-friendly HydraSmart bottle illustration" />
+                        <h3 id="card2-title">Eco Friendly</h3>
+                    </header>
+                    <p id="card2-desc">Made with sustainable materials for a greener planet</p>
+                </article>
+
+                <article class="value-card card" aria-labelledby="card3-title" aria-describedby="card3-desc">
+                    <header>
+                        <img src="/Images/No-leaking.png" alt="HydraSmart leak-proof bottle icon" />
+                        <h3 id="card3-title">Leak Proof</h3>
+                    </header>
+                    <p id="card3-desc">No more wet pants, bags, or accidents</p>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- Bestsellers -->      
+        <section id="best-sellers" aria-labelledby="best-sellers-heading" role="region">
+            <header>
+                <h2 id="best-sellers-heading">Our Bestsellers</h2>
+            </header>  
+                <div class="swiper bestseller-swiper" id="">
+                    <div class="swiper-wrapper bestseller-swiper-wrapper">
+                        
+                        <!-- Dynamically created -->
+
+                    </div>
+                </div>
+        </section>  
+            
+        <!-- Testimonials -->
+        <section id="testimonials" aria-labelledby="testimonials-heading" role="region">
+                <header>
+                    <h2 id="testimonials-heading">What Others Think</h2>
+                </header>
+                <div class="swiper testimonial-swiper">
+                    <div class="swiper-wrapper testimonial-swiper-wrapper">
+                        
+                        <!-- Dynamically created -->
+
+                    </div>
+                </div>
+                <div class="swiper-btn-container">
+                    <button class="prev-btn swiper-btn" aria-label="Previous testimonial">
+                        <i class="fa-solid fa-backward"></i>
+                    </button>
+                    <button class="next-btn swiper-btn" aria-label="Next testimonial">
+                        <i class="fa-solid fa-forward"></i>
+                    </button>
+                </div>
+        </section> 
+
+            <!-- How does it work -->
+        <section id="how-does-it-work" aria-labelledby="how-does-it-work-heading" role="region">
+                <header>
+                    <h2 id="how-does-it-work-heading">How Does It Work</h2>
+                </header>
+                <div class="timeline-container">
+                    <article class="timestamp card">
+                        <header>
+                            <i aria-hidden="true" class="fa-solid fa-download"></i>
+                            <h3>Download The App</h3>
+                        </header>
+                        <p>Inside your box will a QR Code for you to scan.
+                            After scanning, you will be led to our official water 
+                            tracking app. Download it and fill out all required fields. 
+                        </p>
+                    </article>
+                    <i aria-hidden="true" class="fa-solid fa-arrow-down-long arrow"></i>
+                    <article class="timestamp card">
+                        <header>
+                            <i class="fa-solid fa-wifi" aria-hidden="true"></i>
+                            <h3>Connect Your Phone</h3>
+                        </header>
+                        <p>Your bottle syncs via Bluetooth to the HydraSmart 
+                            app. See daily goals, trends, and hydration streaks
+                             — all in one place.</p>
+                    </article>
+                    <i aria-hidden="true" class="fa-solid fa-arrow-down-long arrow"></i>
+                    <article class="timestamp card">
+                        <header>
+                            <i class="fa-solid fa-flag-checkered" aria-hidden="true"></i>
+                            <h3>Tracking Begins</h3>
+                        </header>
+                        <p>Built-in sensors automatically track 
+                            your water intake throughout the day — 
+                            no buttons, no hassle.</p>
+                    </article>
+                    <i class="fa-solid fa-arrow-down-long arrow" aria-hidden="true"></i>
+                    <article class="timestamp card">
+                        <header>
+                            <i class="fa-solid fa-repeat" aria-hidden="true"></i>
+                            <h3>Rinse and Repeat</h3>
+                        </header>
+                        <p>Wash it like any normal bottle (it's 
+                            dishwasher safe!) and recharge the 
+                            cap once a week with the included USB-C 
+                            cable.</p>
+                    </article>
+                </div>
+        </section>
+            
+            <!-- FAQ -->
+        <section id="what-others-asked" aria-labelledby="faq-header" role="region">
+            <header>
+                <h2 id="faq-header">What Others Asked</h2>
+            </header>
+            <div class="faq-container">
+                <div class="faq">
+                    <button 
+                        class="card button-faq closed" 
+                        aria-expanded="false" 
+                        aria-controls="answer1" 
+                        id="faq1">
+                        Is It Dishwasher Safe
+                        <span><i class="fa-solid fa-caret-down"></i></span>
+                    </button>
+                    <div class="answer hidden" id="answer1" aria-hidden="true">
+                        <p>Yes, HydraSmart is dishwasher safe — just place it on the top rack. However, we recommend hand-washing the smart cap to protect the electronic components.</p>
+                    </div>
+                </div>
+
+                <div class="faq">
+                    <button 
+                        class="card button-faq closed" 
+                        aria-expanded="false" 
+                        aria-controls="answer2" 
+                        id="faq2">
+                        How Long Does It Last?
+                        <span><i class="fa-solid fa-caret-down"></i></span>
+                    </button>
+                    <div class="answer hidden" id="answer2" aria-hidden="true">
+                        <p>HydraSmart is built to last. With proper care, it can last several years.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <button 
+                        class="card button-faq closed" 
+                        aria-expanded="false" 
+                        aria-controls="answer3" 
+                        id="faq3">
+                        Is There Microplastic?
+                        <span><i class="fa-solid fa-caret-down"></i></span>
+                    </button>
+                    <div class="answer hidden" id="answer3" aria-hidden="true">
+                        <p>No. HydraSmart is made from high-quality, BPA-free materials and contains no microplastics. It's designed with sustainability and your health in mind.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <button 
+                        class="card button-faq closed" 
+                        aria-expanded="false" 
+                        aria-controls="answer4" 
+                        id="faq4">
+                        What Is It Made Of?
+                        <span><i class="fa-solid fa-caret-down"></i></span>
+                    </button>
+                    <div class="answer hidden" id="answer4" aria-hidden="true">
+                        <p>HydraSmart is made of stainless steel and BPA-free Tritan™ plastic, with a smart cap containing a rechargeable lithium-ion battery and LED hydration tracker.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <button 
+                        class="card button-faq closed" 
+                        aria-expanded="false" 
+                        aria-controls="answer5" 
+                        id="faq5">
+                        Can It Stay In The Sun?
+                        <span><i class="fa-solid fa-caret-down"></i></span>
+                    </button>
+                    <div class="answer hidden" id="answer5" aria-hidden="true">
+                        <p>Yes, the HydraSmart bottle can handle sunlight and warm weather. However, to preserve battery life and avoid overheating the electronics, we suggest not leaving it in direct sunlight for extended periods.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section id="newsletter-main" aria-labelledby="homepage-newsletter-header" role="region">
+            <header>
+                <h2 id="homepage-newsletter-header">Stay in the flow</h2>
+            </header>  
+            <div class="email-container card">
+                <p>Get hydration tips, early access to new features, and exclusive offers — straight to your inbox.</p>
+                <form id="signup-main">
+                    <div class="text-email-input">
+                        <label for="email-main">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email-main" 
+                            name="email" 
+                            placeholder="Enter your email address" 
+                            required 
+                            autocomplete="email">
+                    </div>
+                    <button id='submit-btn' class='submit-btn' type="submit">Subscribe</button>
+                </form>
+            </div>  
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module" src="/JavaScript/main.js"></script>
+</body>
+</html>

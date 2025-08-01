@@ -1,0 +1,78 @@
+    <header id="navigation" role="banner">
+        <nav role="navigation" aria-label="Main Navigation">
+            
+            <!-- Logo -->
+            <div class="logo-img">
+                <a href="index.html">
+                    <img class="logo" src="/Images/logo.png" alt="HydraSmart Logo" alt="">
+                </a>
+            </div>
+
+            <!-- Overlay -->
+            <div id="overlay"></div>
+
+            <!-- Main Navigation Menu -->
+            <div class="nav-links-container" id="main-menu" role="dialog" aria-modal="true">
+            
+                <!-- Close Menu Button -->
+                <button 
+                    aria-label="Close Menu" 
+                    class="icon-button" 
+                    id="close-menu">
+                    <img aria-hidden="true" class="menu-icon" src="/Images/xmark-solid-full.svg" alt="">
+                </button>
+
+                <!-- Navigation Links -->
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact-us.html">Contact Us</a></li>
+                </ul>
+
+                <!-- Social Media Icons -->
+                <div class="social-icons-container">
+                    <h2 class="menu-panel-h2">Follow Us</h2>
+                    <div class="social-icons">
+                    <a href="/Html/follow.html" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter">
+                        <i class="fa-brands fa-twitter social-media-icon"></i>
+                    </a>
+                    <a href="/Html/follow.html" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                        <i class="fa-brands fa-instagram social-media-icon"></i>
+                    </a>
+                    <a href="/Html/follow.html" target="_blank" rel="noopener noreferrer" aria-label="Follow us on YouTube">
+                        <i class="fa-brands fa-youtube social-media-icon"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <!-- Menu Panel Branding -->
+                <div class="menu-panel-logo">
+                    <img src="/Images/logo.png" alt="HydraSmart Logo">
+                    <p>Stay Hydrated - Stay Smart</p>
+                </div>
+            </div>
+
+                <!-- Cart and Menu Buttons -->
+            <div class="nav-buttons-container">
+                <button 
+                aria-label="View Cart" 
+                aria-expanded="false"
+                aria-controls="cart-side-panel"
+                class="icon-button" 
+                id="open-cart-panel">
+                    <img aria-hidden="true" class="cart-icon" src="/Images/cart-icon.png" alt="">
+                </button>
+                <div id="cart-side-panel-placeholder"></div>
+                <button 
+                    aria-label="Toggle Menu" 
+                    aria-expanded="false" 
+                    aria-controls="main-menu" 
+                    class="icon-button menu-active" 
+                    id="open-menu">
+                    <img aria-hidden="true" class="menu-icon" src="/Images/menu-burger-horizontal-svgrepo-com.svg" alt="">
+                </button>
+            </div>
+
+        </nav>
+    </header>

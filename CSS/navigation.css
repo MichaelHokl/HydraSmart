@@ -1,0 +1,291 @@
+nav{
+    height: 78px;
+    width: 100%;
+    background-color: var(--nav-bg-color);
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 2px solid var(--heading-color);
+    top: 0;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row    ;
+}
+
+#navigation{
+    position: relative;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%
+}
+
+#overlay {
+  background-color: rgba(0, 0, 0, 0.808);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
+  pointer-events: none; /
+}
+
+#overlay.on {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+
+.logo-img{
+    width: 152px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-buttons-container{
+    display: flex;
+}
+
+.logo{
+    height: 50px;
+}
+
+.menu-icon{
+    height: 40px;
+    width: 50px;
+}
+
+.cart-icon{
+    height: 40px;
+}
+
+.icon-button{
+    background: none;
+    border: none;
+    width: 100%;
+    display: flex;
+    margin-left: 30px;
+}
+
+.nav-links-container, .cart-side-panel-container{
+    padding-top: 20px;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--nav-bg-color);
+    position: absolute;
+    top: 0;
+    right: -100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-left: 2px solid var(--heading-color);
+    transition: .2s ease-in-out;
+    z-index: 10000;
+}
+
+.cart-side-panel-container{
+    padding: 0;
+}
+
+.menu-open{
+    right: 0%
+}
+
+.nav-links li{
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.nav-links a{
+    font-size: 32px;
+}
+
+.menu-panel-logo{
+    display: flex;
+    flex-direction: column;
+    gap: 24pX
+}
+
+.menu-panel-logo p{
+    text-align: center;
+    font-weight: bolder;
+}
+
+.menu-panel-logo img{
+    height: auto;
+    width: 265px;
+    margin-top: 65px
+}
+
+.menu-panel-h2{
+    color: var(--heading-color);
+    margin: 0
+}
+
+.panel-cart-exit-container{
+    width: 100%;
+    height: 78px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 2px solid var(--heading-color);
+}
+
+.cart-quantity{
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.cart-amount{
+    background-color: var(--link-bg-color);
+    padding: 5px 10px;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+}
+
+.panel-products-container{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.panel-products-container a{
+    text-align: center;
+}
+
+#close-cart-panel{
+    width: 50px;
+    background: none;
+    border: none;
+}
+
+.cart-image{
+    width: auto;
+    height: 120px;
+    border-radius: 5px;
+}
+
+.cart-item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cart-item-container{
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 5px black;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+}
+
+.cart-name-quantity{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 5px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.delete-cart-item-btn{
+    font-size: 14px;
+    padding: 5px 6.75px;
+    background: red;
+    border: 2px solid var(--heading-color);
+    background-color: var(--link-bg-color);
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+#panel-products-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px
+}
+
+.quantity-controls button {
+  width: 25px;
+  height: 25px;
+  background-color: var(--link-bg-color, #007bff);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity-controls input.qty-input {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Remove spinner arrows on number input in Chrome, Safari, Edge */
+.quantity-controls input.qty-input::-webkit-inner-spin-button,
+.quantity-controls input.qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove spinner arrows on Firefox */
+.quantity-controls input.qty-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.subtotal-container{
+    align-items: flex-start;
+    padding: 10px;
+    box-shadow: 0 0 5px black;
+    gap: 5px
+}
+
+.cart-price-p{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cart-price-p:last-of-type{
+    border-top: 2px solid var(--heading-color);
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+
+
+
