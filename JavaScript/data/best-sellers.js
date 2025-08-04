@@ -32,10 +32,12 @@ export function bestsellerRender(){
 
     const html = `
     <div class="swiper-slide bestseller-swiper-slide" id=${bestseller.id}>
-        <div class="bestsellers-image">
+    <div class="product-image-container">
+        <a href="/Html/index.html" class="product-link"> 
             <img src="${bestseller.src}" alt="${bestseller.bestsellerName}">
+            </a>      
         </div>
-        <div class="bestseller-card card">
+        <div class="product-card card">
             <h3>${bestseller.bestsellerName}</h3> 
             <div class="stars" data-rating="${bestseller.rating}" aria-label="${bestseller.rating} out of 5 stars"> 
                 <span class="review-count">(${bestseller.reviewCount})</span>
@@ -44,9 +46,9 @@ export function bestsellerRender(){
                 <span class="high-price">${bestseller.regularPrice}</span>
             </p>
             <div class="centered-button-container">
-                <button aria-label="Add this item to the cart for ${bestseller.salePrice}" class="buy-button" data-id=${bestseller.id}>Add To Cart</button>
+            <button aria-label="Add this item to the cart for ${bestseller.salePrice}" class="buy-button" data-id=${bestseller.id}>Add To Cart</button>
             </div>
-        </div>   
+            </div> 
     </div>
     `;
     swiperWrapper.insertAdjacentHTML('beforeend', html)
