@@ -126,6 +126,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
 
   
   const subtotalContainer = document.createElement('div');
+  const cartControlsContainer = document.createElement('div');
   const subtotal = document.createElement('p');
   const subtotalSpan = document.createElement('span')
   const tax = document.createElement('p');
@@ -135,6 +136,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   const totalSpan = document.createElement('span')
   
   subtotalContainer.className = 'subtotal-container card';
+  cartControlsContainer.className ='cart-controls-container';
   
   const cartP = [subtotal, tax, total];
   const cartSpan = [subtotalSpan, taxSpan, totalSpan];
@@ -163,13 +165,13 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
     taxSpan.textContent = `$${taxAmount.toFixed(2)}`;
     totalSpan.textContent = `$${totalValue.toFixed(2)}`
 
-    subtotalContainer.append(subtotal, tax, total);
+    subtotalContainer.append(subtotal, tax, total, checkoutBtn);
     subtotal.appendChild(subtotalSpan);
     tax.appendChild(taxSpan);
     total.appendChild(totalSpan);
-    
-    panelProductsContainer.appendChild(subtotalContainer)
-    panelProductsContainer.appendChild(checkoutBtn); 
+    cartControlsContainer.appendChild(subtotalContainer);
+
+    panelProductsContainer.appendChild(cartControlsContainer); 
 }
 
 function initCartPanel(openPanel, closePanel, overlay, sidePanel) {
