@@ -55,14 +55,19 @@
 
                 <!-- Cart and Menu Buttons -->
             <div class="nav-buttons-container">
-                <button 
-                aria-label="View Cart" 
-                aria-expanded="false"
-                aria-controls="cart-side-panel"
-                class="icon-button" 
-                id="open-cart-panel">
-                    <img aria-hidden="true" class="cart-icon" src="/Images/cart-icon.png" alt="">
-                </button>
+                <div class="cart">
+                    <div class="cart-quantity">
+                        <div id="cart-amount-container"><span id="cart-amount-nav" class="cart-amount">0</span></div>
+                    </div>
+                    <button 
+                    aria-label="View Cart" 
+                    aria-expanded="false"
+                    aria-controls="cart-side-panel"
+                    class="icon-button" 
+                    id="open-cart-panel">
+                        <img aria-hidden="true" class="cart-icon" src="/Images/cart-icon.png" alt="">
+                    </button>
+                </div>
                 <div id="cart-side-panel-placeholder"></div>
                 <button 
                     aria-label="Toggle Menu" 

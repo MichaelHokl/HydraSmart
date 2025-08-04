@@ -54,6 +54,17 @@ nav{
     display: flex;
 }
 
+.cart{
+    display: flex;
+    position: relative;
+}
+
+#cart-amount-nav{
+    position: absolute;
+    top: -12px;
+    right: -18px
+}
+
 .logo{
     height: 50px;
 }

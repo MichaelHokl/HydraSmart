@@ -14,7 +14,7 @@ const testimonials = [
         reviewText: "I didn't think I needed a smart water bottle until I got the HydraSmart Pro. It's sleek, the app is super easy to use, and the reminders actually help me stay consistent. Totally worth it."
     }, {
         id: "t3",
-        personName: "Kunal K..",
+        personName: "Kunal K.",
         personOccupation: "Marketing Specialist",
         personImg: "/Images/Testimonial-3.png",
         reviewText: "The HydraSmart Pro changed the way I stay hydrated. The glow feature is subtle but effective, and the app syncs perfectly. I bring it everywhere now—it's that good."

@@ -1,4 +1,5 @@
-'use strict'
+'use strict' 
+
 import { bestsellers } from "/JavaScript/data/best-sellers.js";
 import { popUp } from "./popup.js";
 
@@ -11,7 +12,7 @@ export function loadCart() {
       const cart = [];
       const buyButtons = document.querySelectorAll('.buy-button');
       const panelProductsContainer = document.getElementById('panel-products-container');
-      const cartAmount = document.getElementById('cart-amount');
+      const cartAmount = document.getElementById('cart-amount-panel');
 
       const openPanel = document.getElementById('open-cart-panel');
       const closePanel = document.getElementById('close-cart-panel');
@@ -20,7 +21,6 @@ export function loadCart() {
 
       initCartPanel(openPanel, closePanel, overlay, sidePanel);
       updateCartPanel(cart, panelProductsContainer, cartAmount);
-
       buyButtons.forEach(button => {
         button.addEventListener('click', () => {
           const productId = button.dataset.id;
@@ -70,7 +70,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
           <p>$${item.salePrice}</p>
           <div class="quantity-controls">
               <button class="qty-decrease" aria-label="Decrease quantity">-</button>
-                  <input type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
+                  <input id="qty-input" type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
               <button class="qty-increase" aria-label="Increase quantity">+</button>
           </div>
         </div>
@@ -118,7 +118,12 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   checkoutBtn.textContent = 'Checkout';
 
   cartAmount.textContent = totalItems.toString();
-  setAriaLabel(totalItems);
+
+  const cartAmountNav = document.getElementById('cart-amount-nav');
+  cartAmountNav.textContent = totalItems;
+  cartAmount.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`)
+  cartAmountNav.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`)
+
   
   const subtotalContainer = document.createElement('div');
   const subtotal = document.createElement('p');
@@ -164,7 +169,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
     total.appendChild(totalSpan);
     
     panelProductsContainer.appendChild(subtotalContainer)
-    panelProductsContainer.appendChild(checkoutBtn);
+    panelProductsContainer.appendChild(checkoutBtn); 
 }
 
 function initCartPanel(openPanel, closePanel, overlay, sidePanel) {
@@ -194,11 +199,5 @@ function addToCart(cart, productId) {
   return true;
 }
 
-function setAriaLabel(amount) {
-  const element = document.getElementById('cart-amount');
-
-  element.setAttribute(aria-label, `There are ${amount} items in your cart.`)
-
-}
 
 
