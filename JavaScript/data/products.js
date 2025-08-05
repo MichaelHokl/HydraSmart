@@ -1,3 +1,5 @@
+import { attachCartListeners } from "../components/cart-panel.js";
+
 export const products = [
     {
         id: "best001",
@@ -50,31 +52,56 @@ export const products = [
     }
 ];
 
-export function productsRender(){
-    products.forEach(product => {
+export function productsRender(products, cart, panelProductsContainer, cartAmount) {
     const container = document.querySelector('.products-container');
-
-    const html = `
-    <div class="product" id=${product.id}>
-        <div class="product-image-container">
-            <a href="/Html/product-page.html?id=${product.id}" class="product-link" ria-label="View details for ${product.productName}">  
-                <img src="${product.src}" alt="${product.productName}">
-            </a>        
+    container.innerHTML = "";
+    products.forEach(product => {
+        const html = `
+        <div class="product" id=${product.id}>
+            <div class="product-image-container">
+                <a href="/Html/product-page.html?id=${product.id}" class="product-link" ria-label="View details for ${product.productName}">  
+                    <img src="${product.src}" alt="${product.productName}">
+                </a>        
+            </div>
+            <div class="product-card card">
+                <h3>${product.productName}</h3> 
+                <div class="stars" data-rating="${product.rating}" aria-label="${product.rating} out of 5 stars"> 
+                    <span class="review-count">(${product.reviewCount})</span>
+                </div>
+                <p class="price" aria-label="Price $${product.salePrice}">$${product.salePrice}
+                <span class="high-price">$${product.regularPrice}</span>
+                </p>
+                <div class="centered-button-container">
+                <a href="/Html/product-page.html?id=${product.id}" aria-label="Learn more about this product" class="learn-more-button">See Details</a>
+                <button aria-label="Add this item to the cart for ${product.salePrice}" class="buy-button" data-id=${product.id}>Add To Cart</button>
+                </div>
+            </div>   
         </div>
-        <div class="product-card card">
-            <h3>${product.productName}</h3> 
-            <div class="stars" data-rating="${product.rating}" aria-label="${product.rating} out of 5 stars"> 
-                <span class="review-count">(${product.reviewCount})</span>
-            </div>
-            <p class="price" aria-label="Price $${product.salePrice}">$${product.salePrice}
-            <span class="high-price">$${product.regularPrice}</span>
-            </p>
-            <div class="centered-button-container">
-            <a href="/Html/product-page.html?id=${product.id}" aria-label="Learn more about this product" class="learn-more-button">See Details</a>
-            <button aria-label="Add this item to the cart for ${product.salePrice}" class="buy-button" data-id=${product.id}>Add To Cart</button>
-            </div>
-        </div>   
-    </div>
-    `;
-    container.insertAdjacentHTML('beforeend', html)
-})};
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+
+    attachCartListeners(cart, panelProductsContainer, cartAmount);
+};
+
+export function sortProducts(products, criteria) {
+    const sorted = [...products];
+    switch (criteria) {
+        case "price-asc":
+            sorted.sort((a, b) => a.salePrice - b.salePrice);
+            break;
+        case "price-desc":
+            sorted.sort((a, b) => b.salePrice - a.salePrice);
+            break;
+        case "name-asc":
+            sorted.sort((a, b) => a.productName.localeCompare(b.productName));
+            break;
+        case "name-desc":
+            sorted.sort((a, b) => b.productName.localeCompare(a.productName));
+            break;
+        case "popularity":
+            sorted.sort((a, b) => b.reviewCount - a.reviewCount);
+            break;
+    }
+    return sorted;
+}

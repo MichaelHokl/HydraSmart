@@ -5,7 +5,8 @@
 }
 
 :root{
-    --nav-bg-color: #e3eff7;
+    --nav-bg-color: #c395ff;
+    --bg-color: #e3eff7;
     --normal-color: rgb(19, 19, 19);
     --heading-color: #222222;
     --link-bg-color: #5621C4;
@@ -28,7 +29,7 @@ html{
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: var(--nav-bg-color);
+  background-color: var(--bg-color);
   overflow-x: hidden;
 }
 

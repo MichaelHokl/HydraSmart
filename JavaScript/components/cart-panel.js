@@ -3,14 +3,32 @@
 import { bestsellers } from "/JavaScript/data/best-sellers.js";
 import { popUp } from "./popup.js";
 
+
+function saveCartToLocalStorage(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function loadCartFromLocalStorage() {
+  const savedCart = localStorage.getItem('cart');
+  if (savedCart) {
+    try {
+      return JSON.parse(savedCart);
+    } catch (e) {
+      console.error('Failed to parse cart from localStorage:', e);
+      return [];
+    }
+  }
+  return [];
+}
+
+
 export function loadCart() {
-  fetch("./Partials/cart-side-panel.html")
+  return fetch("./Partials/cart-side-panel.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById('cart-side-panel-placeholder').innerHTML = data;
 
-      const cart = [];
-      const buyButtons = document.querySelectorAll('.buy-button');
+      const cart = loadCartFromLocalStorage();
       const panelProductsContainer = document.getElementById('panel-products-container');
       const cartAmount = document.getElementById('cart-amount-panel');
 
@@ -21,19 +39,9 @@ export function loadCart() {
 
       initCartPanel(openPanel, closePanel, overlay, sidePanel);
       updateCartPanel(cart, panelProductsContainer, cartAmount);
-      buyButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const productId = button.dataset.id;
-          const result = addToCart(cart, productId);
+      attachCartListeners(cart, panelProductsContainer, cartAmount);
 
-          if(result) {
-            updateCartPanel(cart, panelProductsContainer, cartAmount);
-            popUp('success', 'Item Added To Cart Succesfully')
-          }else{
-            popUp('error', 'Something Went Wrong. Please Try Again.')
-          }
-        });
-      });
+      return { cart, panelProductsContainer, cartAmount };
     });
 }
 
@@ -82,6 +90,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
       if (index > -1) {
         cart.splice(index, 1);
       }
+      saveCartToLocalStorage(cart);
       updateCartPanel(cart, panelProductsContainer, cartAmount);
     });
 
@@ -94,12 +103,14 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
     decreaseBtn.addEventListener('click', () => {
       if(item.quantity > 1){
         item.quantity--;
+        saveCartToLocalStorage(cart);
         updateCartPanel(cart, panelProductsContainer, cartAmount);
       } 
     });
 
     increaseBtn.addEventListener('click', () => {
       item.quantity++;
+      saveCartToLocalStorage(cart);
       updateCartPanel(cart, panelProductsContainer, cartAmount);
     });
 
@@ -107,6 +118,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
       let newQty = parseInt(qtyInput.value);
       if (isNaN(newQty) || newQty < 1) newQty = 1;
       item.quantity = newQty;
+      saveCartToLocalStorage(cart);
       updateCartPanel(cart, panelProductsContainer, cartAmount);
     });
   });
@@ -198,8 +210,24 @@ function addToCart(cart, productId) {
   } else {
     cart.push({ ...product, quantity: 1 });
   }
+  saveCartToLocalStorage(cart)
   return true;
 }
 
+export function attachCartListeners (cart, panelProductsContainer, cartAmount){
+  const buyButtons = document.querySelectorAll('.buy-button');
+  buyButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const productId = button.dataset.id;
+          const result = addToCart(cart, productId);
 
+          if(result) {
+            updateCartPanel(cart, panelProductsContainer, cartAmount);
+            popUp('success', 'Item Added To Cart Succesfully')
+          }else{
+            popUp('error', 'Something Went Wrong. Please Try Again.')
+          }
+        });
+      });
+}
 

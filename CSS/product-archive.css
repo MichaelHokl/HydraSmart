@@ -48,3 +48,14 @@ aspect-ratio: 4 / 3;
 
 }
 
+#sort-select{
+    padding: 5px 15px;
+    font-size: var(--normal);
+    background-color: var(--link-bg-color);
+    border-radius: 5px;
+    color: white;
+}
+
+.sort-bar{
+    margin-bottom: 20px;
+}
