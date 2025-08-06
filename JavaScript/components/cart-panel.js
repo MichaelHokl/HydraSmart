@@ -4,7 +4,7 @@ import { bestsellers } from "/JavaScript/data/best-sellers.js";
 import { popUp } from "./popup.js";
 
 
-function saveCartToLocalStorage(cart) {
+export function saveCartToLocalStorage(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
@@ -36,18 +36,33 @@ export async function loadCart() {
   const closePanel = document.getElementById('close-cart-panel');
   const overlay = document.getElementById('overlay');
   const sidePanel = document.getElementById('cart-side-panel');
-
+  
   initCartPanel(openPanel, closePanel, overlay, sidePanel);
   updateCartPanel(cart, panelProductsContainer, cartAmount);
   attachCartListeners(cart, panelProductsContainer, cartAmount);
-
+  
   return { cart, panelProductsContainer, cartAmount };
 }
 
 
-function updateCartPanel(cart, panelProductsContainer, cartAmount) {
+export function updateCartPanel(cart, panelProductsContainer, cartAmount) {
+  if(!panelProductsContainer) return;
+  const cartAmountNav = document.getElementById('cart-amount-nav');
   panelProductsContainer.innerHTML = '';
 
+  let totalItems = 0;
+  cart.forEach(item => {
+    totalItems += item.quantity;
+  });
+
+   cartAmount.textContent = totalItems.toString();
+  cartAmount.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`);
+  
+   if (cartAmountNav) {
+    cartAmountNav.textContent = totalItems.toString();
+    cartAmountNav.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`);
+  }
+  
   if (cart.length === 0) {
     panelProductsContainer.innerHTML = `
       <h2>Your Cart Is Empty<br><br>Go Fill It Up</h2>
@@ -57,32 +72,29 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
     return;
   }
 
-  let totalItems = 0;
-
   cart.forEach(item => {
-    totalItems += item.quantity;
-    const itemDiv = document.createElement('div');
-    itemDiv.classList.add('cart-item');
+  const itemDiv = document.createElement('div');
+  itemDiv.classList.add('cart-item');
 
-    itemDiv.innerHTML = `
-      <div class="cart-item-container">
-        <button
-          aria-label="Delete Item"
-          aria-controls="cart-item"
-          class="delete-cart-item-btn">
-          <i class="fa-solid fa-xmark cart-item-delete"></i>
-        </button>
-        <img src="${item.src}" class="cart-image" aria-hidden="true" alt=""/>
-        <div class="cart-name-quantity">
-          <p>${item.bestsellerName}</p>
-          <p>$${item.salePrice}</p>
-          <div class="quantity-controls">
-              <button class="qty-decrease" aria-label="Decrease quantity">-</button>
-                  <input type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
-              <button class="qty-increase" aria-label="Increase quantity">+</button>
-          </div>
+  itemDiv.innerHTML = `
+    <div class="cart-item-container">
+      <button
+        aria-label="Delete Item"
+        aria-controls="cart-item"
+        class="delete-cart-item-btn">
+        <i class="fa-solid fa-xmark cart-item-delete"></i>
+      </button>
+      <img src="${item.src}" class="cart-image" aria-hidden="true" alt=""/>
+      <div class="cart-name-quantity">
+        <p>${item.bestsellerName}</p>
+        <p>$${item.salePrice}</p>
+        <div class="quantity-controls">
+            <button class="qty-decrease" aria-label="Decrease quantity">-</button>
+            <input type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
+            <button class="qty-increase" aria-label="Increase quantity">+</button>
         </div>
-      </div>`;
+      </div>
+    </div>`;
 
     const deleteButton = itemDiv.querySelector('.delete-cart-item-btn');
     deleteButton.addEventListener('click', () => {
@@ -131,8 +143,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
 
   cartAmount.textContent = totalItems.toString();
 
-  const cartAmountNav = document.getElementById('cart-amount-nav');
-  cartAmountNav.textContent = totalItems;
+  cartAmountNav.textContent = totalItems.toString();
   cartAmount.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`)
   cartAmountNav.setAttribute('aria-label', `There ${totalItems === 1 ? 'is only' : 'are'} ${totalItems} ${totalItems === 1 ? 'item' : 'items'} in your cart.`)
 
@@ -143,7 +154,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   const subtotalSpan = document.createElement('span')
   const tax = document.createElement('p');
   const taxSpan = document.createElement('span')
-  const taxPercentage = 0.19;
+  const taxPercentage = 0.07;
   const total = document.createElement('p');
   const totalSpan = document.createElement('span')
   
@@ -200,7 +211,7 @@ function initCartPanel(openPanel, closePanel, overlay, sidePanel) {
   });
 }
 
-function addToCart(cart, productId) {
+export function addToCart(cart, productId) {
   const product = bestsellers.find(p => p.id === productId);
   if (!product) return false;
 

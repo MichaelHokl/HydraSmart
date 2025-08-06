@@ -1,7 +1,8 @@
 'use strict'
 import { products } from "../data/products.js"
 import { popUp } from "./popup.js";
-
+import { quantityControl } from "../utils/quatity-control.js";
+import { loadCartFromLocalStorage, addToCart, updateCartPanel } from "./cart-panel.js";
 
 function getId (){
     const params = new URLSearchParams(window.location.search);
@@ -50,7 +51,7 @@ function renderProduct(){
 
           <p class="badge">🚚 Free shipping on orders over $50</p>
         <div class="centered-button-container">
-            <button class="buy-button" aria-label="Add ${product.productName} to cart">Add to Cart</button>
+            <button class="buy-button" aria-label="Add ${product.productName} to cart" data-id=${product.id}>Add to Cart</button>
         </div>
         <div class="tab-container">
             <div class="tabs">
@@ -69,7 +70,6 @@ function renderProduct(){
                 id="open-shipping-details-${product.id}"
                 >Shipping</button>
             </div>
-
             <div class="product-details" id="product-details-${product.id}">
                 <h3> Product Description</h3>
                 <p class="description">${product.description}</p>
@@ -77,7 +77,6 @@ function renderProduct(){
                     ${Object.values(product.takeaways).map(point => `<li>${point}</li>`).join('')}
                 </ul>
             </div>
-
             <div class="shipping-details tab-closed" id="shipping-details-${product.id}">     
                 <h3>Shipping Information</h3>
                 <ul class="shipping-policies">
@@ -91,17 +90,22 @@ function renderProduct(){
                     </li>
                     <li><strong>Shipping Carriers:</strong> USPS, UPS, or FedEx (based on location).</li>
                     <li><strong>Tracking:</strong> Tracking details will be emailed once your order ships.</li>
-                    <li><strong>International Shipping:</strong> Available to selected countries. Delivery time varies by destination. Customs fees may apply.</li>
+                    <li><strong>International Shipping:</strong> Available to select countries. Delivery time varies by destination. Customs fees may apply.</li>
                     <li><strong>Shipping Fees:</strong> Free shipping on orders over $50. Flat rate of $4.99 on smaller orders.</li>
                     <li><strong>Lost or Delayed Packages:</strong> Contact our support team within 30 days for assistance.</li>
                 </ul>
             </div>
-
         </div>
     </div>
     </article>
         `
-        productPageContainer.appendChild(productDiv)
+        productPageContainer.appendChild(productDiv);
+
+        const panelProductsContainer = document.getElementById('panel-products-container');
+        const cartAmount = document.getElementById('cart-amount-panel');
+        const button = productDiv.querySelector('.buy-button');
+        const cart = loadCartFromLocalStorage();
+        addingProductsToCart(button, cart, panelProductsContainer, cartAmount)
     }
     tabDisplay()
 }
@@ -124,6 +128,15 @@ function tabDisplay(){
     })
 }
     
-
-
+function addingProductsToCart(button, cart, panelProductsContainer, cartAmount){
+    button.addEventListener('click', () => {
+        const added = addToCart(cart, product.id);
+            if (added) {
+            updateCartPanel(cart, panelProductsContainer, cartAmount);
+            popUp('success', 'Item Added To Cart Successfully');
+            } else {
+                popUp('error', 'Failed to add item to cart');
+            }
+});
+}
 renderProduct()

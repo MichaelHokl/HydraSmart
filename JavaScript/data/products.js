@@ -122,7 +122,7 @@ export function sortedRender(){
             const newlySortedProducts = sortProducts(products);
             productsRender(newlySortedProducts);
             const panelProductsContainer = document.getElementById('panel-products-container')        
-            const cartAmount = document.getElementById('cart-amount-panel');
+            const cartAmount = document.getElementById('cart-amount-nav');
             attachCartListeners(cart, panelProductsContainer, cartAmount)
         });
     }
