@@ -8,7 +8,7 @@ function saveCartToLocalStorage(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function loadCartFromLocalStorage() {
+export function loadCartFromLocalStorage() {
   const savedCart = localStorage.getItem('cart');
   if (savedCart) {
     try {
@@ -22,28 +22,28 @@ function loadCartFromLocalStorage() {
 }
 
 
-export function loadCart() {
-  return fetch("./Partials/cart-side-panel.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('cart-side-panel-placeholder').innerHTML = data;
+export async function loadCart() {
+  const response = await fetch("./Partials/cart-side-panel.html");
+  const data = await response.text();
 
-      const cart = loadCartFromLocalStorage();
-      const panelProductsContainer = document.getElementById('panel-products-container');
-      const cartAmount = document.getElementById('cart-amount-panel');
+  document.getElementById('cart-side-panel-placeholder').innerHTML = data;
 
-      const openPanel = document.getElementById('open-cart-panel');
-      const closePanel = document.getElementById('close-cart-panel');
-      const overlay = document.getElementById('overlay');
-      const sidePanel = document.getElementById('cart-side-panel');
+  const cart = loadCartFromLocalStorage();
+  const panelProductsContainer = document.getElementById('panel-products-container');
+  const cartAmount = document.getElementById('cart-amount-panel');
 
-      initCartPanel(openPanel, closePanel, overlay, sidePanel);
-      updateCartPanel(cart, panelProductsContainer, cartAmount);
-      attachCartListeners(cart, panelProductsContainer, cartAmount);
+  const openPanel = document.getElementById('open-cart-panel');
+  const closePanel = document.getElementById('close-cart-panel');
+  const overlay = document.getElementById('overlay');
+  const sidePanel = document.getElementById('cart-side-panel');
 
-      return { cart, panelProductsContainer, cartAmount };
-    });
+  initCartPanel(openPanel, closePanel, overlay, sidePanel);
+  updateCartPanel(cart, panelProductsContainer, cartAmount);
+  attachCartListeners(cart, panelProductsContainer, cartAmount);
+
+  return { cart, panelProductsContainer, cartAmount };
 }
+
 
 function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   panelProductsContainer.innerHTML = '';
@@ -51,7 +51,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
   if (cart.length === 0) {
     panelProductsContainer.innerHTML = `
       <h2>Your Cart Is Empty<br><br>Go Fill It Up</h2>
-      <a href="products.html" class="link-button" aria-label="Shop Now for eco-friendly smart water bottles">Shop Now</a>
+      <a href="/Html/product.html" class="link-button" aria-label="Shop Now for eco-friendly smart water bottles">Shop Now</a>
     `;
     cartAmount.textContent = '0';
     return;
@@ -78,7 +78,7 @@ function updateCartPanel(cart, panelProductsContainer, cartAmount) {
           <p>$${item.salePrice}</p>
           <div class="quantity-controls">
               <button class="qty-decrease" aria-label="Decrease quantity">-</button>
-                  <input id="qty-input" type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
+                  <input type="number" class="qty-input" min="1" value="${item.quantity}" aria-label="Quantity for ${item.bestsellerName}" />
               <button class="qty-increase" aria-label="Increase quantity">+</button>
           </div>
         </div>

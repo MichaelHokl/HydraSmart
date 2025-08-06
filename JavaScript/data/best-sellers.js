@@ -31,7 +31,7 @@ export function bestsellerRender(){
     const swiperWrapper = document.querySelector('.bestseller-swiper-wrapper');
 
     const html = `
-    <div class="swiper-slide bestseller-swiper-slide" id=${bestseller.id}>
+    <div class="swiper-slide bestseller-swiper-slide">
     <div class="product-image-container">
         <a href="/Html/index.html" class="product-link"> 
             <img src="${bestseller.src}" alt="${bestseller.bestsellerName}">

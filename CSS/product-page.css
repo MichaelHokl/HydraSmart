@@ -1,0 +1,143 @@
+#navigation-placeholder{
+    margin-bottom: 47px;
+}
+
+.single-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+}
+
+.single-product .buy-button{
+    margin: 15px 0;
+    width: 100%;
+}
+
+.single-product img{
+    height: auto;
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px black;
+}
+
+.single-product h2, .single-product p{
+    text-align: left;
+}
+
+.description{
+    margin-top: 30px;
+    white-space: pre-wrap;
+}
+
+.takeaways-list{
+    margin-top: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.takeaways-list li{
+    list-style: none;
+    position: relative;
+    padding-left: 25px;
+}
+
+.takeaways-list li::before{
+    content: "💧";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0
+}
+
+.product-card{
+    box-shadow: 0 0 4px 2px black;
+    border-radius: 5px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card h2{
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+.product-details, .shipping-details{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipping-details h3 {
+    margin-bottom: 30px;
+}
+
+.price{
+    margin-top: 15px;
+}
+
+.tab-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tabs{
+    width: 100%;
+
+}
+
+.tab-button{
+    font-size: 20px;
+    text-align: center;
+    color: black;
+    background-color: var(--nav-bg-color);
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    width: 49%
+
+}
+
+.tab-closed{
+    display: none;
+}
+
+.badge{
+    text-align: center !important;
+}
+
+.shipping-details ul{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 25px
+}
+
+.shipping-details ul li{
+    font-size: var(--font-size-normal);
+}
+
+.shipping-details ul ul{
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    margin-left: 25px;
+}
+
+.shipping-details ul ul li:nth-of-type(1){
+    margin-top: 15px;
+}

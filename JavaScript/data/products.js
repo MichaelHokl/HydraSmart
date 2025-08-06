@@ -1,4 +1,4 @@
-import { attachCartListeners } from "../components/cart-panel.js";
+import { attachCartListeners, loadCartFromLocalStorage } from "../components/cart-panel.js";
 
 export const products = [
     {
@@ -9,7 +9,7 @@ export const products = [
         reviewCount: 163,
         salePrice: 39.99,
         regularPrice: 89.99,
-        description: 'The HydraSmart-Lite is an entry-level hydration tracker designed for everyday users who want to maintain optimal hydration without breaking the bank. Lightweight and compact, it seamlessly integrates with your daily routine, providing accurate water intake monitoring and timely reminders to keep you refreshed throughout the day. Ideal for casual athletes, office workers, or anyone focused on staying healthy with minimal fuss.',
+        description: `The HydraSmart-Lite is an entry-level hydration tracker designed for everyday use.<br><br>Users who want to maintain optimal hydration without breaking the bank.<br><br>Lightweight and compact, it seamlessly integrates with your daily routine, providing accurate water intake monitoring and timely reminders to keep you refreshed throughout the day.<br><br>Ideal for casual athletes, office workers, or anyone focused on staying healthy with minimal fuss.`,
         takeaways: {
             point1: 'Accurate daily water intake tracking',
             point2: 'Lightweight and portable design',
@@ -25,7 +25,7 @@ export const products = [
         reviewCount: 591,
         salePrice: 59.99,
         regularPrice: 109.99,
-        description: 'The HydraSmart-ProMaxx steps up your hydration game with enhanced features for fitness enthusiasts and active lifestyles. Featuring advanced sensors, it tracks not only your water consumption but also adjusts recommendations based on your activity level, ambient temperature, and personal hydration goals. The ProMaxx pairs effortlessly with your smartphone, giving you detailed hydration analytics and motivational insights to optimize your performance.',
+        description: 'The HydraSmart-ProMaxx steps up your hydration game with enhanced features for fitness enthusiasts and active lifestyles.<br><br>Featuring advanced sensors, it tracks not only your water consumption but also adjusts recommendations based on your activity level, ambient temperature, and personal hydration goals.<br><br>The ProMaxx pairs effortlessly with your smartphone, giving you detailed hydration analytics and motivational insights to optimize your performance.',
         takeaways: {
             point1: 'Adaptive hydration recommendations based on activity and environment',
             point2: 'Real-time hydration analytics via smartphone app',
@@ -41,7 +41,7 @@ export const products = [
         reviewCount: 1173,
         salePrice: 99.99,
         regularPrice: 189.99,
-        description: 'The HydraSmart-ProUltra is the ultimate hydration solution for professionals and athletes demanding precision and comprehensive health tracking. It combines cutting-edge sensor technology with AI-powered hydration insights and integration with health platforms. The ProUltra monitors hydration status, electrolyte balance, and even detects signs of dehydration early. Its premium build and extended battery life make it the ideal companion for high-performance training and critical health monitoring.',
+        description: 'The HydraSmart-ProUltra is the ultimate hydration solution for professionals and athletes demanding precision and comprehensive health tracking.<br><br>It combines cutting-edge sensor technology with AI-powered hydration insights and integration with health platforms.<br><br>The ProUltra monitors hydration status, electrolyte balance, and even detects signs of dehydration early.<br><br>Its premium build and extended battery life make it the ideal companion for high-performance training and critical health monitoring.',
         takeaways: {
             point1: 'AI-powered hydration and electrolyte balance monitoring',
             point2: 'Early dehydration detection alerts',
@@ -52,14 +52,17 @@ export const products = [
     }
 ];
 
-export function productsRender(products, cart, panelProductsContainer, cartAmount) {
-    const container = document.querySelector('.products-container');
+export function productsRender(products) {
+    const container = document.getElementById('products-archive-product-container');
+    
+    if(!container) return;
+    
     container.innerHTML = "";
     products.forEach(product => {
         const html = `
         <div class="product" id=${product.id}>
             <div class="product-image-container">
-                <a href="/Html/product-page.html?id=${product.id}" class="product-link" ria-label="View details for ${product.productName}">  
+                <a href="/Html/product-page.html?id=${product.id}" class="product-link" aria-label="View details for ${product.productName}">  
                     <img src="${product.src}" alt="${product.productName}">
                 </a>        
             </div>
@@ -80,12 +83,15 @@ export function productsRender(products, cart, panelProductsContainer, cartAmoun
         `;
         container.insertAdjacentHTML('beforeend', html);
     });
-
-    attachCartListeners(cart, panelProductsContainer, cartAmount);
 };
 
-export function sortProducts(products, criteria) {
+export function sortProducts(products) {
     const sorted = [...products];
+    const select = document.getElementById('sort-select');
+
+    if(!select) return sorted; 
+
+    const criteria = select.value;
     switch (criteria) {
         case "price-asc":
             sorted.sort((a, b) => a.salePrice - b.salePrice);
@@ -105,3 +111,21 @@ export function sortProducts(products, criteria) {
     }
     return sorted;
 }
+
+export const sortedProducts = sortProducts(products);
+
+export function sortedRender(){
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            const cart = loadCartFromLocalStorage();
+            const newlySortedProducts = sortProducts(products);
+            productsRender(newlySortedProducts);
+            const panelProductsContainer = document.getElementById('panel-products-container')        
+            const cartAmount = document.getElementById('cart-amount-panel');
+            attachCartListeners(cart, panelProductsContainer, cartAmount)
+        });
+    }
+}
+
+
